@@ -84,7 +84,7 @@ byte Adafruit_HMC5883_Unified::read8(byte address, byte reg) {
   Wire.send(reg);
 #endif
   Wire.endTransmission();
-  Wire.requestFrom(address, (byte)1);
+  Wire.requestFrom((uint16_t)address, (uint8_t)1, true);
 #if ARDUINO >= 100
   value = Wire.read();
 #else
@@ -109,7 +109,7 @@ void Adafruit_HMC5883_Unified::read() {
   Wire.send(HMC5883_REGISTER_MAG_OUT_X_H_M);
 #endif
   Wire.endTransmission(false);
-  Wire.requestFrom((byte)HMC5883_ADDRESS_MAG, (byte)6, true);
+  Wire.requestFrom((uint16_t)HMC5883_ADDRESS_MAG, (uint8_t)6, true);
 
 // Note high before low (different than accel)
 #if ARDUINO >= 100
